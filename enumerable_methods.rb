@@ -2,13 +2,13 @@ module Enumerable
 
 #my_each
 def my_each
-    i = 0
+    x = 0
     while i < self.size
-        yield(self[i])  
-        i+=1      
+        yield(self[x])  
+        x+=1      
     end
     self
-  end
+    end
 end
 
 #my_each_with_index
@@ -51,11 +51,7 @@ def my_inject
 
 end
 
-
-
-
-
-
-end #end of module enumerable
+#last of module enumerable
+end
 
 
