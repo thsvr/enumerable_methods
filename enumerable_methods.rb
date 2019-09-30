@@ -1,57 +1,70 @@
 module Enumerable
 
-#my_each
-def my_each
-    x = 0
-    while i < self.size
-        yield(self[x])  
-        x+=1      
+    #my_each 1
+    def my_each
+        x = 0
+        while x < self.size
+            yield(self[x])  
+            x+=1      
+        end
+        self
     end
-    self
+
+    #my_each_with_index 2
+    def my_each_with_index
+        for x in 0...self.length
+            yield self[x], x
+        end
     end
-end
 
-#my_each_with_index
-def each_with_index
+    #my_select 
+    def my_select
 
-end
+    end
 
-#my_select 
-def my_select
+    #my_all?
+    def my_all?
 
-end
+    end
 
-#my_all?
-def my_all?
+    #my_any?
+    def my_any?
 
-end
+    end
 
-#my_any?
-def my_any?
+    #my_none?
+    def my_none?
 
-end
+    end
 
-#my_none?
-def my_none?
+    #my_count
+    def my_count
 
-end
+    end
 
-#my_count
-def my_count
+    #my_map
+    def my_map
 
-end
+    end
 
-#my_map
-def my_map
+    #my_inject
+    def my_inject
 
-end
-
-#my_inject
-def my_inject
-
-end
+    end
 
 #last of module enumerable
 end
 
+#to test
+array = [1,2,3,4]
+=begin my_each 1 working
+array.each { |number| puts number ** 3}
+puts ''
+array.my_each { |number| puts number ** 3}
+=end
 
+=begin my_each_with_index 2 working
+array.each_with_index {|number, index| puts array [number] = index}
+puts ""
+array.my_each_with_index {|number, index| puts array [number] = index}
+=end
