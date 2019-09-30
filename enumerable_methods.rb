@@ -26,9 +26,13 @@ module Enumerable
         selected_elements
     end
 
-    #my_all?
+    #my_all? 4
     def my_all?
-
+        result = self
+        result.my_each do |x|
+            return false unless yield(x)
+        end
+        true
     end
 
     #my_any?
@@ -56,7 +60,7 @@ module Enumerable
 
     end
 
-#last of module enumerable
+#last end of module enumerable
 end
 
 #to test
@@ -66,6 +70,11 @@ array.each { |number| puts number ** 3}
 puts ''
 array.my_each { |number| puts number ** 3}
 =end
+
+
+
+
+
 
 =begin my_each_with_index 2 working
 array.each_with_index {|number, index| puts array [number] = index}
@@ -77,4 +86,9 @@ array.my_each_with_index {|number, index| puts array [number] = index}
 array.select {|num| puts num.even? }
 puts ""
 array.my_select {|num| puts num.even? }
+=end
+
+=begin
+array.all? {|num| puts num.length <= 4 }
+array.my_all? { |num| puts num.length <= 4 }
 =end
