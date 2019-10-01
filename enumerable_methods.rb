@@ -111,7 +111,7 @@ module Enumerable
     end
     operand
     end
-    end
+  end
 
 # multiply_els 10
 def multiply_els(value)
