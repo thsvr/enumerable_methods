@@ -73,9 +73,14 @@ module Enumerable
     count
     end
 
-    #my_map
-    def my_map
-
+    #my_map 8
+    def my_map proc=nil
+        var=self
+        result = []
+        var.my_each do |x|
+            result << ((block_given?)? yield(x):proc.call(x))
+        end
+        result
     end
 
     #my_inject
@@ -126,7 +131,14 @@ array_words.my_none? {|word| puts word.length <= 1 }
 =end
 
 =begin count 7 working
- puts array.count 
- puts " "
- puts array.my_count
- =end
+puts array.count 
+puts " "
+puts array.my_count
+=end
+
+#begin
+array.map { |i| puts i*2 } 
+puts " "
+array.my_map { |i| puts i*2 }
+
+#end
