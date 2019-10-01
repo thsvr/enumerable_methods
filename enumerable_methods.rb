@@ -108,10 +108,10 @@ module Enumerable
                 else
                   yield(operand, i)
                 end
-      end
-      operand
     end
+    operand
   end
+end
 
 # multiply_els 10
 def multiply_els(value)
@@ -119,8 +119,8 @@ def multiply_els(value)
 end
 
 # to test
-#array = [1, 2, 3, 4]
-#array_words = %w[one two three four]
+# array = [1, 2, 3, 4]
+# array_words = %w[one two three four]
 
 # my_each 1 working
 # array.each { |number| puts number ** 3}
