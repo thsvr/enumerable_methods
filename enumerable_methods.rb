@@ -59,9 +59,18 @@ module Enumerable
         true
     end
 
-    #my_count
+    #my_count 7
     def my_count
-
+        var = self
+    count = 0
+    var.my_each do |y|
+      if block_given? && yield(y)
+        count += 1
+      else
+        count = var.length
+      end
+    end
+    count
     end
 
     #my_map
@@ -115,3 +124,9 @@ array_words.none? {|word| puts word.length <= 1 }
 puts ""
 array_words.my_none? {|word| puts word.length <= 1 } 
 =end
+
+=begin count 7 working
+ puts array.count 
+ puts " "
+ puts array.my_count
+ =end
