@@ -38,9 +38,16 @@ module Enumerable
         result
     end
 
-    #my_any?
+    #my_any? 5
     def my_any?
-
+        var = self
+        return var if !block_given?
+        my_each do |x|
+            if yield(x) == true
+                return true
+            end
+        end 
+        false
     end
 
     #my_none?
@@ -87,8 +94,14 @@ puts ""
 array.my_select {|num| puts num.even? }
 =end
 
-#begin my_all 4 working but the output is different
+=begin my_all? 4 working but the output is different
 array_words.all? {|word| puts word.length <= 5 } #output true
 puts ""
-array_words.my_all? {|word| puts word.length <= 5 } #output true true true true
+array_words.my_all? {|word| puts word.length <= 5 } #output true true true true WHY? 
+=end
+
+#begin my_any? 4 working 
+array_words.any? {|word| puts word.length <= 3 } #output 
+puts ""
+array_words.my_any? {|word| puts word.length <= 3 } #output 
 #end
