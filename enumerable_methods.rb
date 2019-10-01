@@ -27,15 +27,19 @@ module Enumerable
     end
 
     #my_all? 4
-    def my_all?
-        var = self
-        result = []
-        var.my_each do |x|
-            if yield(x)
-                result << x
-            end
-        end
-        result
+    def my_all?(par=nil)
+      if block_given?
+        my_each { |x| return false unless yield(x) }
+      elsif par.class == Class
+        my_each { |x| return false unless x.class == par }
+      elsif par.class == Regexp
+        my_each { |x| return false unless x =~ par }
+      elsif par.nil?
+        my_each { |x| return false unless x }
+      else
+        my_each { |x| return false unless x == par }
+      end
+      true
     end
 
     #my_any? 5
@@ -62,15 +66,15 @@ module Enumerable
     #my_count 7
     def my_count
         var = self
-    count = 0
-    var.my_each do |y|
+        count = 0
+     var.my_each do |y|
       if block_given? && yield(y)
         count += 1
       else
         count = var.length
       end
-    end
-    count
+     end
+        count
     end
 
     #my_map 8
@@ -83,27 +87,44 @@ module Enumerable
         result
     end
 
-    #my_inject
-    def my_inject (init=nil)
-        var=self
-        result=init
-    var.my_each do |x|
-      if result.nil?
-        result=x
-      else
-        result = yield(result,x)
+    #my_inject 9
+    def my_inject(*args)
+        arr = to_a.dup
+        if args[0].nil?
+          operand = arr.shift
+        elsif args[1].nil? && !block_given?
+          symbol = args[0]
+          operand = arr.shift
+        elsif args[1].nil? && block_given?
+          operand = args[0]
+        else
+          symbol = args[0]
+          operand = args[1]
+        end
+    
+        arr[0..-1].my_each do |i|
+          operand = if symbol
+                      operand.send(symbol. i)
+                    else
+                      yield(operand, i)
+                    end
+        end
+        operand
       end
     end
-    result
-  end
-end
+    
+    #multiply_els 10
+    def multiply_els(value)
+        value.my_inject() { |mult, x| mult * x }
+    end 
 
-#last end of module enumerable
-#end
+
+
 
 #to test
 array = [1,2,3,4]
 array_words = ["one", "two", "three", "four"]
+
 =begin my_each 1 working
 array.each { |number| puts number ** 3}
 puts ''
@@ -122,10 +143,10 @@ puts ""
 array.my_select {|num| puts num.even? }
 =end
 
-=begin my_all? 4 working but the output is different
-array_words.all? {|word| puts word.length <= 5 } #output true
+=begin my_all? 4 working 
+array_words.all?() {|word| puts word.length <= 5 } 
 puts ""
-array_words.my_all? {|word| puts word.length <= 5 } #output true true true true WHY? 
+array_words.my_all?() {|word| puts word.length <= 5 } 
 =end
 
 =begin my_any? 5 working 
@@ -153,7 +174,11 @@ array.my_map { |i| puts i*2 }
 =end
 
 =begin my_inject 9 working
-p array.inject { |sum, n| sum + n }
+p array.inject { |sum, n| sum ** n }
 puts " "
-p array.my_inject { |sum, n| sum + n }
+p array.my_inject { |sum, n| sum ** n }
+=end
+
+=begin multiply_els 10 working
+p multiply_els([2,4,5])
 =end
