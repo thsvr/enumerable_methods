@@ -50,9 +50,13 @@ module Enumerable
         false
     end
 
-    #my_none?
+    #my_none? 6
     def my_none?
-
+        var = self
+        var.my_each do |x|
+            return false if yield(x)
+        end 
+        true
     end
 
     #my_count
@@ -100,8 +104,14 @@ puts ""
 array_words.my_all? {|word| puts word.length <= 5 } #output true true true true WHY? 
 =end
 
-#begin my_any? 4 working 
-array_words.any? {|word| puts word.length <= 3 } #output 
+=begin my_any? 5 working 
+array_words.any? {|word| puts word.length <= 3 } 
 puts ""
-array_words.my_any? {|word| puts word.length <= 3 } #output 
-#end
+array_words.my_any? {|word| puts word.length <= 3 }  
+=end
+
+=begin my_none? 6 I guess it working bc both show the same result
+array_words.none? {|word| puts word.length <= 1 } 
+puts ""
+array_words.my_none? {|word| puts word.length <= 1 } 
+=end
