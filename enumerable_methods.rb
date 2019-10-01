@@ -84,12 +84,22 @@ module Enumerable
     end
 
     #my_inject
-    def my_inject
-
+    def my_inject (init=nil)
+        var=self
+        result=init
+    var.my_each do |x|
+      if result.nil?
+        result=x
+      else
+        result = yield(result,x)
+      end
     end
+    result
+  end
+end
 
 #last end of module enumerable
-end
+#end
 
 #to test
 array = [1,2,3,4]
@@ -124,7 +134,7 @@ puts ""
 array_words.my_any? {|word| puts word.length <= 3 }  
 =end
 
-=begin my_none? 6 I guess it working bc both show the same result
+=begin my_none? 6 working 
 array_words.none? {|word| puts word.length <= 1 } 
 puts ""
 array_words.my_none? {|word| puts word.length <= 1 } 
@@ -136,9 +146,14 @@ puts " "
 puts array.my_count
 =end
 
-#begin
+=begin my_map 8 working
 array.map { |i| puts i*2 } 
 puts " "
 array.my_map { |i| puts i*2 }
+=end
 
-#end
+=begin my_inject 9 working
+p array.inject { |sum, n| sum + n }
+puts " "
+p array.my_inject { |sum, n| sum + n }
+=end
