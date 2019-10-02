@@ -80,7 +80,7 @@ module Enumerable
   end
 
   # my_count 7
-  def my_count (items = nil)
+  def my_count(items = nil)
     count = 0
     if block_given?
       my_each { |x| count += 1 if yield(x) == true }
@@ -136,8 +136,8 @@ def multiply_els(value)
 end
 
 # to test
-array = [1, 2, 3, 4]
-array_words = %w[one two three four]
+# array = [1, 2, 3, 4]
+# array_words = %w[one two three four]
 
 # my_each 1 working
 # array.each { |number| puts number ** 3}
