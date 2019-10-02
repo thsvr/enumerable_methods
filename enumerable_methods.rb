@@ -3,6 +3,7 @@
 module Enumerable
   # my_each 1
   def my_each
+    return to_enum unless block_given?
     x = 0
     while x < size
       yield(self[x])
@@ -20,6 +21,7 @@ module Enumerable
 
   # my_select 3
   def my_select
+    return to_enum unless block_given?
     selected_elements = []
     my_each do |x|
       selected_elements << x if yield x
@@ -79,6 +81,7 @@ module Enumerable
 
   # my_map 8
   def my_map(proc = nil)
+    return to_enum unless block_given?
     var = self
     result = []
     var.my_each do |x|
@@ -119,8 +122,8 @@ def multiply_els(value)
 end
 
 # to test
-# array = [1, 2, 3, 4]
-# array_words = %w[one two three four]
+ array = [1, 2, 3, 4]
+ array_words = %w[one two three four]
 
 # my_each 1 working
 # array.each { |number| puts number ** 3}
