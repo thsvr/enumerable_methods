@@ -15,6 +15,8 @@ module Enumerable
 
   # my_each_with_index 2
   def my_each_with_index
+    return to_enum unless block_given?
+
     (0...size).each do |x|
       yield self[x], x
     end
@@ -48,33 +50,33 @@ module Enumerable
   end
 
   # my_any? 5
-  def my_any?(_par = nil)
+  def my_any?(par = nil)
     if block_given?
       my_each { |x| return true if yield(x) }
-    elsif param.class == Class
-      my_each { |x| return true if x.class == param }
-    elsif param.class == Regexp
-      my_each { |x| return true if x =~ param }
-    elsif param.nil?
+    elsif par.class == Class
+      my_each { |x| return true if x.class == par }
+    elsif par.class == Regexp
+      my_each { |x| return true if x =~ par }
+    elsif par.nil?
       my_each { |x| return true if x }
     else
-      my_each { |x| return true if x == param }
+      my_each { |x| return true if x == par }
     end
     false
   end
 
   # my_none? 6
-  def my_none?(_par = nil)
+  def my_none?(par = nil)
     if block_given?
       my_each { |x| return false if yield(x) }
-    elsif param.class == Class
-      my_each { |x| return false if x.class == param }
-    elsif param.class == Regexp
-      my_each { |x| return false if x =~ param }
-    elsif param.nil?
+    elsif par.class == Class
+      my_each { |x| return false if x.class == par }
+    elsif par.class == Regexp
+      my_each { |x| return false if x =~ par }
+    elsif par.nil?
       my_each { |x| return false if x }
     else
-      my_each { |x| return false if x == param }
+      my_each { |x| return false if x == par }
     end
     true
   end
