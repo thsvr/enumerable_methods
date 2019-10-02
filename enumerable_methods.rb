@@ -108,31 +108,30 @@ module Enumerable
   def my_inject(*args)
     arr = to_a.dup
     if args[0].nil?
-      operand = arr.shift
+      memo = arr.shift
     elsif args[1].nil? && !block_given?
       symbol = args[0]
-      operand = arr.shift
+      memo = arr.shift
     elsif args[1].nil? && block_given?
-      operand = args[0]
+      memo = args[0]
     else
-      symbol = args[0]
-      operand = args[1]
+      memo = args[0]
+      symbol = args[1]
     end
-
-    arr[0..-1].my_each do |i|
-      operand = if symbol
-                  operand.send(symbol. i)
-                else
-                  yield(operand, i)
-                end
+    arr[0..-1].my_each do |elem|
+      memo = if symbol
+               memo.send(symbol, elem)
+             else
+               yield(memo, elem)
+             end
     end
-    operand
+    memo
   end
 end
 
 # multiply_els 10
 def multiply_els(value)
-  value.my_inject { |mult, x| mult * x }
+  value.my_inject :*
 end
 
 # to test
