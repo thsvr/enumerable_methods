@@ -48,21 +48,33 @@ module Enumerable
   end
 
   # my_any? 5
-  def my_any?
-    var = self
-    return var unless block_given?
-
-    my_each do |x|
-      return true if yield(x) == true
+  def my_any?(_par = nil)
+    if block_given?
+      my_each { |x| return true if yield(x) }
+    elsif param.class == Class
+      my_each { |x| return true if x.class == param }
+    elsif param.class == Regexp
+      my_each { |x| return true if x =~ param }
+    elsif param.nil?
+      my_each { |x| return true if x }
+    else
+      my_each { |x| return true if x == param }
     end
     false
   end
 
   # my_none? 6
-  def my_none?
-    var = self
-    var.my_each do |x|
-      return false if yield(x)
+  def my_none?(_par = nil)
+    if block_given?
+      my_each { |x| return false if yield(x) }
+    elsif param.class == Class
+      my_each { |x| return false if x.class == param }
+    elsif param.class == Regexp
+      my_each { |x| return false if x =~ param }
+    elsif param.nil?
+      my_each { |x| return false if x }
+    else
+      my_each { |x| return false if x == param }
     end
     true
   end
@@ -149,14 +161,14 @@ array_words = %w[one two three four]
 # array_words.my_all?() {|word| puts word.length <= 5 }
 
 # my_any? 5 working
-# array_words.any? {|word| puts word.length <= 3 }
-# puts ""
-# array_words.my_any? {|word| puts word.length <= 3 }
+# array_words.any? { |word| puts word.length <= 3 }
+# puts ''
+# array_words.my_any? { |word| puts word.length <= 3 }
 
 # my_none? 6 working
-# array_words.none? {|word| puts word.length <= 1 }
-# puts ""
-# array_words.my_none? {|word| puts word.length <= 1 }
+# array_words.none? { |word| puts word.length <= 1 }
+# puts ''
+# array_words.my_none? { |word| puts word.length <= 1 }
 
 # count 7 working
 # puts array.count
