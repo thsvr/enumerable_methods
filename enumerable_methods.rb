@@ -80,15 +80,14 @@ module Enumerable
   end
 
   # my_count 7
-  def my_count
-    var = self
+  def my_count(items = nil)
     count = 0
-    var.my_each do |y|
-      if block_given? && yield(y)
-        count += 1
-      else
-        count = var.length
-      end
+    if block_given?
+      my_each { |x| count += 1 if yield(x) == true }
+    elsif items.nil?
+      my_each { count += 1 }
+    else
+      my_each { |x| count += 1 if x == items }
     end
     count
   end
@@ -171,9 +170,9 @@ array_words = %w[one two three four]
 # array_words.my_none? { |word| puts word.length <= 1 }
 
 # count 7 working
-# puts array.count
-# puts " "
-# puts array.my_count
+puts array.count
+puts ' '
+puts array.my_count
 
 # my_map 8 working
 # array.map { |i| puts i*2 }
