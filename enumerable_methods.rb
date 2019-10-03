@@ -135,4 +135,3 @@ end
 def multiply_els(value)
   value.my_inject :*
 end
-
