@@ -90,7 +90,17 @@ end
     end
 end
 
+    describe "#my_map" do
+    it "returns a new array with the results of running block." do
+    
+    default_arr = []
+    tested_arr = []
 
+    array.map {|x| x * x}
+    array.my_map {|x| x * x}
+    expect(tested_arr).to eql(default_arr)
+    end
+end
 
 
 end #end of the method?
