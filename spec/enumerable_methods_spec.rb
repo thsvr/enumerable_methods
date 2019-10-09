@@ -114,5 +114,11 @@ end
     end
 end
 
+describe "#multiply_els" do
+    it "return the product of all the elements of an array" do
 
-end #end of the method?
+        result = multiply_els(array)
+        expect(result).to eql(5040)
+    end
+end
+end 
