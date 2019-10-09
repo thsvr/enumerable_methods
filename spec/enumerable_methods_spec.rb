@@ -66,7 +66,17 @@ end
     end
 end
 
+    describe "#my_none?" do
+    it "returns true if no elements are true (or empty array)." do
+    
+    default_arr = []
+    tested_arr = []
 
+    array.select {|x| x == 8}
+    array.my_select {|x| x == 8}
+    expect(tested_arr).to eql(default_arr)
+    end
+end
 
 
 
