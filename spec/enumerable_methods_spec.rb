@@ -48,8 +48,8 @@ end
     default_arr = []
     tested_arr = []
 
-    array.select {|x| x > 0}
-    array.my_select {|x| x > 0 }
+    array.all? {|x| x > 0}
+    array.my_all? {|x| x > 0 }
     expect(tested_arr).to eql(default_arr)
     end
 end
@@ -60,8 +60,8 @@ end
     default_arr = []
     tested_arr = []
 
-    array.select {|x| x > 3}
-    array.my_select {|x| x > 3}
+    array.any? {|x| x > 3}
+    array.my_any? {|x| x > 3}
     expect(tested_arr).to eql(default_arr)
     end
 end
@@ -72,13 +72,23 @@ end
     default_arr = []
     tested_arr = []
 
-    array.select {|x| x == 8}
-    array.my_select {|x| x == 8}
+    array.none? {|x| x == 8}
+    array.my_none? {|x| x == 8}
     expect(tested_arr).to eql(default_arr)
     end
 end
 
+    describe "#my_count" do
+    it "takes an enumerable collection and counts how many elements match the given criteria." do
+    
+    default_arr = []
+    tested_arr = []
 
+    array.count {|x| x > 5}
+    array.my_count {|x| x > 5}
+    expect(tested_arr).to eql(default_arr)
+    end
+end
 
 
 
