@@ -42,6 +42,17 @@ end
     end
 end
 
+    describe "#my_all?" do
+    it "returns true if ALL elements are true (or empty array)" do
+    
+    default_arr = []
+    tested_arr = []
+
+    array.select {|x| x > 0}
+    array.my_select {|x| x > 0 }
+    expect(tested_arr).to eql(default_arr)
+    end
+end
 
 
 
