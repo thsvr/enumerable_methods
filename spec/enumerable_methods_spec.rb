@@ -18,4 +18,24 @@ RSpec.describe Enumerable do
     end
 end
 
+    describe "#my_each_with_index" do
+    it "the item and its index is returned" do
+        
+    default_arr = []
+    tested_arr = []
+
+    array.each_with_index {|x, y| tested_arr << [x, y] }
+    array.my_each_with_index {|x, y| default_arr << [x, y] }
+    expect(tested_arr).to eql(default_arr)
+    end
+end
+
+
+
+
+
+
+
+
+
 end #end of the method?
