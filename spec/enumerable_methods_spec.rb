@@ -90,6 +90,18 @@ end
     end
 end
 
+    describe "#my_inject" do
+    it "combines all elements of enum by applying a binary operation" do
+    
+    default_arr = []
+    tested_arr = []
+
+    array.inject {|x, y| x + y}
+    array.my_inject {|x, y| x + y}
+    expect(tested_arr).to eql(default_arr)
+    end
+end
+
 
 
 
