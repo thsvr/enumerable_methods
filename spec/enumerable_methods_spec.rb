@@ -30,6 +30,18 @@ end
     end
 end
 
+    describe "#my_select" do
+    it "select elements by given specific condition" do
+        
+    default_arr = []
+    tested_arr = []
+
+    array.select {|x| x < 2 }
+    array.my_select {|x| x < 2 }
+    expect(tested_arr).to eql(default_arr)
+    end
+end
+
 
 
 
