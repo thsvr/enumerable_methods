@@ -37,12 +37,9 @@ RSpec.describe Enumerable do
   end
 
   describe '#my_all?' do
-    it 'returns true if all elements are true (or empty array)' do
-      default_arr = []
-      tested_arr = []
-
-      array.all? { |x| x > 0 }
-      array.my_all? { |x| x > 0 }
+    it 'returns true if all elements are true (or empty array)' do   
+      default = array.all? { |x| x > 0 }
+      tested = array.my_all? { |x| x > 0 }
       expect(tested_arr).to eql(default_arr)
     end
   end
