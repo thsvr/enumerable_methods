@@ -40,18 +40,15 @@ RSpec.describe Enumerable do
     it 'returns true if all elements are true (or empty array)' do   
       default = array.all? { |x| x > 0 }
       tested = array.my_all? { |x| x > 0 }
-      expect(tested_arr).to eql(default_arr)
+      expect(tested).to eql(default)
     end
   end
 
   describe '#my_any?' do
     it 'returns true if at least one element is true (or non empty array).' do
-      default_arr = []
-      tested_arr = []
-
-      array.any? { |x| x > 3 }
-      array.my_any? { |x| x > 3 }
-      expect(tested_arr).to eql(default_arr)
+      default = array.any? { |x| x > 3 }
+      tested = array.my_any? { |x| x > 3 }
+      expect(tested).to eql(default)
     end
   end
 
