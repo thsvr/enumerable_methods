@@ -37,7 +37,7 @@ RSpec.describe Enumerable do
   end
 
   describe '#my_all?' do
-    it 'returns true if all elements are true (or empty array)' do   
+    it 'returns true if all elements are true (or empty array)' do
       default = array.all? { |x| x > 0 }
       tested = array.my_all? { |x| x > 0 }
       expect(tested).to eql(default)
@@ -54,44 +54,32 @@ RSpec.describe Enumerable do
 
   describe '#my_none?' do
     it 'returns true if no elements are true (or empty array).' do
-      default_arr = []
-      tested_arr = []
-
-      array.none? { |x| x == 8 }
-      array.my_none? { |x| x == 8 }
-      expect(tested_arr).to eql(default_arr)
+      default = array.none? { |x| x == 8 }
+      tested = array.my_none? { |x| x == 8 }
+      expect(tested).to eql(default)
     end
   end
 
   describe '#my_count' do
     it 'takes an enumerable collection and counts how many elements match the given criteria.' do
-      default_arr = []
-      tested_arr = []
-
-      array.count { |x| x > 5 }
-      array.my_count { |x| x > 5 }
-      expect(tested_arr).to eql(default_arr)
+      default = array.count { |x| x > 5 }
+      tested = array.my_count { |x| x > 5 }
+      expect(tested).to eql(default)
     end
   end
 
   describe '#my_map' do
     it 'returns a new array with the results of running block.' do
-      default_arr = []
-      tested_arr = []
-
-      array.map { |x| x * x }
-      array.my_map { |x| x * x }
+      default_arr = array.map { |x| x * x }
+      tested_arr = array.my_map { |x| x * x }
       expect(tested_arr).to eql(default_arr)
     end
   end
 
   describe '#my_inject' do
     it 'combines all elements of enum by applying a binary operation' do
-      default_arr = []
-      tested_arr = []
-
-      array.inject { |x, y| x + y }
-      array.my_inject { |x, y| x + y }
+      default_arr = array.inject { |x, y| x + y }
+      tested_arr = array.my_inject { |x, y| x + y }
       expect(tested_arr).to eql(default_arr)
     end
   end
