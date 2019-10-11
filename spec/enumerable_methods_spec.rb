@@ -5,7 +5,7 @@ require_relative '../enumerable_methods.rb'
 # good
 RSpec.describe Enumerable do
   let(:array) { [1, 2, 3, 4, 5, 6, 7] }
-  let(:names) { %w[thais sofi amanda] }
+  let(:names) { %w[thais amanda sofi] }
   let(:operator) { proc { |x| x + 1 } }
 
   describe '#my_each' do
@@ -158,6 +158,14 @@ RSpec.describe Enumerable do
       default_arr = array.inject { |x, y| x + y }
       tested_arr = array.my_inject { |x, y| x + y }
       expect(tested_arr).to eql(default_arr)
+    end
+
+    it 'returns the name if it is greater than the name of its left side' do
+      expect(names.my_inject { |x, name| x.length > name.length ? x : name }).to eq 'amanda'
+    end
+
+    it 'returns the sum of the elements plus 5' do
+      expect(array.my_inject(5) { |sum, x| sum + x }).to eq(33)
     end
   end
 
