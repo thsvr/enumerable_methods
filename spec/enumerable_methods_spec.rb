@@ -5,6 +5,7 @@ require_relative '../enumerable_methods.rb'
 # good
 RSpec.describe Enumerable do
   let(:array) { [1, 2, 3, 4, 5, 6, 7] }
+  let(:names) { %w[thais sofi amanda] }
 
   describe '#my_each' do
     it 'returns the array itself' do
@@ -42,13 +43,43 @@ RSpec.describe Enumerable do
       tested = array.my_all? { |x| x > 0 }
       expect(tested).to eql(default)
     end
-    it 'Returns true if the block passed never returns false/nil' do
+
+    it 'returns true if the block passed never returns false/nil' do
       expect(array.my_all? { |x| x > 0 }).to eql(true)
       expect(array.my_all? { |x| x < 0 }).to eql(false)
     end
-    it 'Returns false if the block passed never returns false/nil' do
+
+    it 'returns false if the block passed never returns false/nil' do
       expect(array.my_all? { |x| x < 0 }).to eql(false)
       expect(array.my_all? { |x| x > 0 }).to eql(true)
+    end
+
+    it 'returns false when it checks my_all?' do
+      my_array = [false, true, false].my_all?
+      array = [true, false, true].all?
+      expect(my_array).to eql(array)
+    end
+
+    context 'Argument = Class'
+    it 'Returns true when all elements belong to the class passed as argument' do
+      expect(array.my_all?(Integer)).to eql(true)
+      expect(array.my_all?(String)).to eql(false)
+    end
+
+    it 'Returns false when all elements belong to the class passed as argument' do
+      expect(array.my_all?(Integer)).to eql(false)
+      expect(array.my_all?(String)).to eql(true)
+    end
+
+    context 'Argument = Regexp'
+    it 'Returns true when all elements match the Regular Expression passed' do
+      expect(names.my_all?(/[a-z]/)).to eql(true)
+      expect(names.my_all?(/d/)).to eql(false)
+    end
+
+    it 'Returns false when all elements match the Regular Expression passed' do
+      expect(names.my_all?(/[a-z]/)).to eql(false)
+      expect(names.my_all?(/d/)).to eql(true)
     end
   end
 
@@ -57,6 +88,28 @@ RSpec.describe Enumerable do
       default = array.any? { |x| x > 3 }
       tested = array.my_any? { |x| x > 3 }
       expect(tested).to eql(default)
+    end
+
+    context 'Argument = Class'
+    it 'Returns true when all elements belong to the class passed as argument' do
+      expect(array.my_any?(Integer)).to eql(true)
+      expect(array.my_any?(String)).to eql(false)
+    end
+
+    it 'Returns false when all elements belong to the class passed as argument' do
+      expect(array.my_any?(Integer)).to eql(false)
+      expect(array.my_any?(String)).to eql(true)
+    end
+
+    context 'Argument = Regexp'
+    it 'Returns true when all elements match the Regular Expression passed' do
+      expect(names.my_any?(/[a-z]/)).to eql(true)
+      expect(names.my_any?(/z/)).to eql(false)
+    end
+
+    it 'Returns false when all elements match the Regular Expression passed' do
+      expect(names.my_any?(/[a-z]/)).to eql(false)
+      expect(names.my_any?(/z/)).to eql(true)
     end
   end
 
