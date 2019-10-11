@@ -22,6 +22,10 @@ RSpec.describe Enumerable do
     it 'returns an Enumerator when no block given' do
       expect(array.my_each.is_a?(Enumerator)).to be(true)
     end
+
+    it 'returns the default array when the output is not there' do
+      expect(array.my_each { operator }).to eq(array)
+    end
   end
 
   describe '#my_each_with_index' do
@@ -42,6 +46,10 @@ RSpec.describe Enumerable do
     context 'when a block is not given'
     it 'returns an Enumerator when no block given' do
       expect(names.my_each_with_index.is_a?(Enumerator)).to be(true)
+    end
+
+    it 'returns the default array when the output is not there' do
+      expect(array.my_each_with_index { operator }).to eq(0...7)
     end
   end
 
