@@ -6,6 +6,7 @@ require_relative '../enumerable_methods.rb'
 RSpec.describe Enumerable do
   let(:array) { [1, 2, 3, 4, 5, 6, 7] }
   let(:names) { %w[thais sofi amanda] }
+  let(:operator) { proc { |x| x + 1 } }
 
   describe '#my_each' do
     it 'returns the array itself' do
@@ -118,6 +119,18 @@ RSpec.describe Enumerable do
       tested = array.my_count { |x| x > 5 }
       expect(tested).to eql(default)
     end
+
+    it 'returns array length when no block given' do
+      expect(array.my_count).to eq(7)
+    end
+
+    it 'returns the number of elements that is equal to the given argument' do
+      expect(array.my_count(2)).to eq(1)
+    end
+
+    it 'returns the number of elements that match with a given condition' do
+      expect(array.my_count(&:odd?)).to eq(4)
+    end
   end
 
   describe '#my_map' do
@@ -125,6 +138,18 @@ RSpec.describe Enumerable do
       default_arr = array.map { |x| x * x }
       tested_arr = array.my_map { |x| x * x }
       expect(tested_arr).to eql(default_arr)
+    end
+
+    it 'returns a modified array resulting from block operation' do
+      expect(array.my_map(&operator)).to eq([2, 3, 4, 5, 6, 7, 8])
+    end
+
+    it 'returns modified array when given a range with a block' do
+      expect(array.my_map(&operator)).to eq([2, 3, 4, 5, 6, 7, 8])
+    end
+
+    it 'returns array of strings when given array of integers' do
+      expect(array.my_map(&:to_s)).to eq(%w[1 2 3 4 5 6 7])
     end
   end
 
