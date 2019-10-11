@@ -16,6 +16,11 @@ RSpec.describe Enumerable do
       array.my_each { |x| tested_arr << x + 1 }
       expect(tested_arr).to eql(default_arr)
     end
+
+    context 'when a block is not given'
+    it 'returns an Enumerator when no block given' do
+      expect(array.my_each.is_a?(Enumerator)).to be(true)
+    end
   end
 
   describe '#my_each_with_index' do
@@ -26,6 +31,16 @@ RSpec.describe Enumerable do
       array.each_with_index { |x, y| tested_arr << [x, y] }
       array.my_each_with_index { |x, y| default_arr << [x, y] }
       expect(tested_arr).to eql(default_arr)
+    end
+
+    context 'when a block is not given'
+    it 'returns an Enumerator when no block given' do
+      expect(array.my_each_with_index.is_a?(Enumerator)).to be(true)
+    end
+
+    context 'when a block is not given'
+    it 'returns an Enumerator when no block given' do
+      expect(names.my_each_with_index.is_a?(Enumerator)).to be(true)
     end
   end
 
