@@ -45,7 +45,7 @@ RSpec.describe Enumerable do
     end
 
     context 'Argument = Class'
-    it 'Returns true when all elements belong to the class passed as argument and false when it does not pass' do
+    it 'returns true when all elements belong to the class passed as argument or false when it does not pass' do
       expect(array.my_all?(Integer)).to eql(true)
       expect(array.my_all?(String)).to eql(false)
     end
@@ -58,20 +58,20 @@ RSpec.describe Enumerable do
   end
 
   describe '#my_any?' do
-    it 'returns true if at least one element is true (or non empty array).' do
+    it 'returns true if at least one element is true (or non empty array) or false when it does not pass.' do
       default = array.any? { |x| x > 3 }
       tested = array.my_any? { |x| x > 3 }
       expect(tested).to eql(default)
     end
 
     context 'Argument = Class'
-    it 'Returns true when all elements belong to the class passed as argument' do
+    it 'returns true when all elements belong to the class passed as argument or false when it does not pass' do
       expect(array.my_any?(Integer)).to eql(true)
       expect(array.my_any?(String)).to eql(false)
     end
 
     context 'Argument = Regexp'
-    it 'Returns true when all elements match the Regular Expression passed' do
+    it 'returns true when all elements match the Regular Expression passed or false when it does not pass' do
       expect(names.my_any?(/[a-z]/)).to eql(true)
       expect(names.my_any?(/z/)).to eql(false)
     end
@@ -85,13 +85,13 @@ RSpec.describe Enumerable do
     end
 
     context 'Argument = Class'
-    it 'Returns true when all elements belong to the class passed as argument' do
+    it 'returns true when all elements belong to the class passed as argument or false when it does not pass' do
       expect(array.my_none?(Integer)).to eql(false)
       expect(array.my_none?(String)).to eql(true)
     end
 
     context 'Argument = Regexp'
-    it 'Returns true when all elements match the Regular Expression passed' do
+    it 'returns true when all elements match the Regular Expression passed or false when it does not pass' do
       expect(names.my_none?(/[a-z]/)).to eql(false)
       expect(names.my_none?(/z/)).to eql(true)
     end
