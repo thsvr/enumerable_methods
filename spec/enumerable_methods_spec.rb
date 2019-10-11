@@ -43,12 +43,12 @@ RSpec.describe Enumerable do
       expect(tested).to eql(default)
     end
     it 'Returns true if the block passed never returns false/nil' do
-      expect(array.my_all?{ |x| x > 0 }).to eql(true)
-      expect(array.my_all?{ |x| x < 0 }).to eql(false)
+      expect(array.my_all? { |x| x > 0 }).to eql(true)
+      expect(array.my_all? { |x| x < 0 }).to eql(false)
     end
     it 'Returns false if the block passed never returns false/nil' do
-      expect(array.my_all?{ |x| x < 0 }).to eql(false)
-      expect(array.my_all?{ |x| x > 0 }).to eql(true)
+      expect(array.my_all? { |x| x < 0 }).to eql(false)
+      expect(array.my_all? { |x| x > 0 }).to eql(true)
     end
   end
 
