@@ -19,3 +19,4 @@ Implementation of the following enumerable methods present in Ruby:
 ## Author - click on the link below to see the author's github
 
 * <a href="https://github.com/thsvr"> Github: Thaís Vieira Azevedo</a>
+* <a href="https://github.com/SofiBretz"> Github: Sofía Barrantes</a>
